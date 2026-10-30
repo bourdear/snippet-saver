@@ -1,0 +1,50 @@
+name: CI
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: snippet_saver
+          POSTGRES_USER: snippet_saver
+          POSTGRES_PASSWORD: snippet_saver
+        ports:
+          - 5432:5432
+        # Wait until Postgres accepts connections before the steps run.
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest
+
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build image
+        run: docker build -t snippet-saver .
