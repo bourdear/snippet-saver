@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Snippet Saver{% endblock %}</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 720px; margin: 0 auto; padding: 16px; }
+    nav { display: flex; gap: 16px; padding-bottom: 12px; margin-bottom: 24px; border-bottom: 1px solid #8884; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 12px 0; border-bottom: 1px solid #8884; }
+    pre { padding: 12px; overflow-x: auto; border: 1px solid #8884; border-radius: 6px; }
+    label { display: block; font-weight: 600; }
+    input[type="text"], select, textarea { width: 100%; box-sizing: border-box; padding: 8px; font: inherit; }
+    textarea { font-family: ui-monospace, monospace; }
+    .meta { color: #888; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'snippets:list' %}">All Snippets</a>
+    <a href="{% url 'snippets:create' %}">New Snippet</a>
+  </nav>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

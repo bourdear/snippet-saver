@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}All Snippets | Snippet Saver{% endblock %}
+
+{% block content %}
+  <h1>All Snippets</h1>
+  <ul>
+    {% for snippet in snippet_list %}
+      <li>
+        <a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a>
+        <div class="meta">{{ snippet.get_language_display }} · {{ snippet.created_at|date:"M j, Y" }}</div>
+      </li>
+    {% empty %}
+      <li>No snippets yet. <a href="{% url 'snippets:create' %}">Add the first one.</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

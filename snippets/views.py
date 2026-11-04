@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import CreateView, DetailView, ListView
+from .models import Snippet
 
-# Create your views here.
+
+class SnippetListView(ListView):
+    model = Snippet
+
+class SnippetDetailView(DetailView):
+    model = Snippet
+
+class SnippetCreateView(CreateView):
+    model = Snippet
+    fields = ['title', 'language', 'code']

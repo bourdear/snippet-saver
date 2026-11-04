@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Snippet(models.Model):
@@ -11,7 +12,7 @@ class Snippet(models.Model):
         BASH = 'bash', 'Bash'
         OTHER = 'other', 'Other'
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     language = models.CharField(max_length=20, choices=Language.choices)
     code = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,3 +22,6 @@ class Snippet(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('snippets:detail', args=[self.pk])
