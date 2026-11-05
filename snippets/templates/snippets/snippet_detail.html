@@ -6,4 +6,8 @@
   <h1>{{ snippet.title }}</h1>
   <p class="meta">{{ snippet.get_language_display }} · {{ snippet.created_at|date:"M j, Y" }}</p>
   <pre><code>{{ snippet.code }}</code></pre>
+  <p class="actions">
+    <a href="{% url 'snippets:update' snippet.pk %}">Edit</a>
+    <a href="{% url 'snippets:delete' snippet.pk %}">Delete</a>
+  </p>
 {% endblock %}

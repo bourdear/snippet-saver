@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}New Snippet | Snippet Saver{% endblock %}
+{% block title %}{% if object %}Edit{% else %}New{% endif %} Snippet | Snippet Saver{% endblock %}
 
 {% block content %}
-  <h1>New Snippet</h1>
+  <h1>{% if object %}Edit{% else %}New{% endif %} Snippet</h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
